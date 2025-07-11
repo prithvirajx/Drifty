@@ -341,46 +341,39 @@ h2 {
 }
 
 .create-post-card {
-  margin-bottom: 30px;
-  padding: 20px;
-  border: 1px solid rgba(255,0,0,0.15);
+  background: rgba(15, 15, 15, 0.8);
+  backdrop-filter: blur(12px);
   border-radius: 16px;
-  background: rgba(26,26,26,0.75);
-  backdrop-filter: blur(10px);
+  border: 1px solid transparent;
+  padding: 20px;
+  margin-bottom: 20px;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.create-post-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 16px;
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, rgba(255,0,0,0.2), rgba(255,0,0,0)) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
 }
 
 .create-post-top {
   display: flex;
-  align-items: center;
-  gap: 15px;
+  justify-content: center;
 }
 
 .upload-btn {
-  padding: 8px 14px;
-  background: rgba(255,0,0,0.2);
-  border: 1px solid rgba(255,0,0,0.4);
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  color: #fff;
-  transition: background 0.3s ease;
-}
-
-.upload-btn:hover {
-  background: rgba(255, 0, 0, 0.35);
-}
-
-.caption-input {
-  flex: 1;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 8px;
-  padding: 8px 12px;
-  color: #fff;
-}
-
-.post-btn {
-  padding: 8px 14px;
+  padding: 12px 24px;
   background: linear-gradient(90deg, #ff0000, #ff6b6b);
   border: none;
   border-radius: 8px;
@@ -388,11 +381,15 @@ h2 {
   font-weight: 600;
   cursor: pointer;
   transition: opacity 0.3s ease;
+  text-align: center;
+  width: auto;
 }
 
-.post-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
+.upload-btn:hover {
+  background: linear-gradient(90deg, #ff0000, #ff5252);
+}
+
+.caption-input, .post-btn {
 }
 
 .preview-wrapper {
@@ -953,11 +950,11 @@ h2 {
   border-radius: 8px;
   color: #fff;
   font-size: 16px;
+  transition: all 0.3s ease;
   appearance: none;
   background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
   background-repeat: no-repeat;
   background-position: right 10px center;
-  background-size: 12px;
   padding-right: 30px;
   cursor: pointer;
 }
@@ -1460,12 +1457,13 @@ h2 {
 
 .chat-message.sent {
   align-self: flex-end;
-  background: linear-gradient(90deg, #ff0000, #ff6b6b);
+  background: linear-gradient(90deg, #ff0000, #ff5252);
 }
 
 .chat-message.received {
   align-self: flex-start;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(60, 60, 60, 0.7);
+  border-bottom-left-radius: 4px;
 }
 
 .chat-input-area {
@@ -1644,10 +1642,6 @@ h2 {
     gap: 20px;
   }
 
-  .post-card .post-media {
-    aspect-ratio: 1/1;
-  }
-
   .bottom-nav {
     bottom: 0;
     padding: 10px 0;
@@ -1670,4 +1664,314 @@ h2 {
   .bottom-item span {
     font-size: 10px;
   }
+}
+
+@media (max-width: 768px) {
+  .home-page {
+    padding: 10px;
+    overflow-x: hidden;
+  }
+  .home-container {
+    padding: 10px;
+  }
+}
+
+/* Mobile responsiveness for CreatePostCard */
+@media (max-width: 768px) {
+  .create-post-top {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .create-post-top .upload-btn,
+  .create-post-top .caption-input,
+  .create-post-top .post-btn {
+    width: 100%;
+    text-align: center;
+  }
+  .create-post-card {
+    padding: 15px;
+    margin: 10px;
+  }
+}
+
+/* Modal styles */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, rgba(10,10,10,0.92) 70%, rgba(120,0,0,0.32) 100%);
+  border: 1.5px solid rgba(120,0,0,0.28);
+  box-shadow: 0 8px 32px 0 rgba(120,0,0,0.18), 0 1.5px 8px 0 rgba(0,0,0,0.25);
+  border-radius: 24px;
+  padding: 32px 24px 24px 24px;
+  width: 95%;
+  max-width: 400px;
+  max-height: 92vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.media-preview-container {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.modal-caption-input {
+  width: 100%;
+  min-height: 48px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 12px;
+  color: #fff;
+  margin-bottom: 15px;
+  resize: vertical;
+}
+
+.media-preview-container {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.media-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.media-upload-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.media-upload-btn {
+  padding: 12px 24px;
+  background: rgba(255,0,0,0.2);
+  border: 1px solid rgba(255,0,0,0.4);
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.media-upload-btn:hover {
+  background: rgba(255,0,0,0.3);
+}
+
+.post-btn {
+  width: 100%;
+  padding: 15px;
+  background: #ff0000;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.post-btn:hover {
+  background: #cc0000;
+}
+
+.modal-footer {
+  margin-top: 15px;
+  padding-top: 0;
+}
+
+/* --- Create Post Modal Custom Styles --- */
+.media-preview-outer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 260px;
+  margin: 0;
+}
+
+.media-preview-3by4 {
+  width: 260px;
+  aspect-ratio: 3 / 4;
+  background: linear-gradient(135deg, rgba(20,20,20,0.92) 70%, rgba(120,0,0,0.32) 100%);
+  border-radius: 18px;
+  border: 1.5px solid rgba(120,0,0,0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(120,0,0,0.08);
+  position: relative;
+}
+
+.media-preview-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.media-upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #888;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.media-upload-btn {
+  background: linear-gradient(90deg, #ff0033 0%, #ff6b6b 100%);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 22px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(255,0,0,0.08);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.media-upload-btn:hover {
+  background: linear-gradient(90deg, #ff0033 0%, #cc0000 100%);
+  box-shadow: 0 4px 16px rgba(255,0,0,0.18);
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-caption-input {
+  width: 260px;
+  min-height: 48px;
+  resize: none;
+  border-radius: 14px;
+  border: 1.5px solid rgba(255,0,0,0.18);
+  background: rgba(30, 30, 30, 0.55);
+  color: #fff;
+  padding: 12px 14px;
+  font-size: 1.08rem;
+  margin-bottom: 0;
+  box-shadow: 0 2px 8px rgba(255,0,0,0.04);
+  outline: none;
+  transition: border 0.2s;
+  text-align: center;
+}
+.modal-caption-input:focus {
+  border: 1.5px solid #ff0033;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 0;
+  width: 100%;
+}
+
+.post-btn {
+  width: 260px;
+  padding: 15px;
+  background: linear-gradient(90deg, #ff0033 0%, #ff6b6b 100%);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.15rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(255,0,0,0.10);
+  letter-spacing: 0.5px;
+  transition: background 0.2s, box-shadow 0.2s;
+  text-align: center;
+}
+.post-btn:hover {
+  background: linear-gradient(90deg, #ff0033 0%, #cc0000 100%);
+  box-shadow: 0 4px 16px rgba(255,0,0,0.18);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  right: auto;
+  width: 40px;
+  height: 40px;
+  background: rgba(120,0,0,0.22);
+  border: none;
+  border-radius: 50%;
+  color: #ff0033;
+  font-size: 1.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(120,0,0,0.10);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.18s;
+  z-index: 2;
+  padding: 0;
+}
+.modal-close-btn svg {
+  display: block;
+  width: 26px;
+  height: 26px;
+}
+.modal-close-btn:hover, .modal-close-btn:focus {
+  background: rgba(255,0,51,0.22);
+  color: #ff0033;
+  outline: none;
+  box-shadow: 0 0 0 2px #ff0033, 0 4px 16px rgba(255,0,51,0.18);
+  transform: scale(1.12) rotate(-8deg);
+}
+
+.posting-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #ff0033 0%, #ff6b6b 100%);
+  margin-right: 8px;
+  animation: posting-dot-pulse 0.8s infinite alternate;
+  vertical-align: middle;
+}
+@keyframes posting-dot-pulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.3); opacity: 1; }
 }
