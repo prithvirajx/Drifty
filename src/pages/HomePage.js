@@ -24,7 +24,7 @@ const dummyPosts = [
   },
 ];
 
-const HomePage = () => {
+const HomePage = ({ onNavigate }) => {
   const [posts, setPosts] = useState(dummyPosts);
 
   /* --- Chat state --- */
@@ -132,25 +132,27 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Bottom Navigation */}
-      <nav className="bottom-nav glass-card">
-        <div className="bottom-item active">
-          <HomeIcon className="bottom-icon" />
-          <span>Feed</span>
-        </div>
-        <div className="bottom-item disabled">
-          <UsersIcon className="bottom-icon" />
-          <span>Hangout</span>
-        </div>
-        <div className="bottom-item disabled">
-          <CalendarDaysIcon className="bottom-icon" />
-          <span>Event</span>
-        </div>
-        <div className="bottom-item disabled">
-          <UserCircleIcon className="bottom-icon" />
-          <span>Profile</span>
-        </div>
-      </nav>
+      {/* Bottom Navigation (hide when chat room is open) */}
+      {!activeChat && (
+        <nav className="bottom-nav glass-card">
+          <div className="bottom-item active">
+            <HomeIcon className="bottom-icon" />
+            <span>Feed</span>
+          </div>
+          <div className="bottom-item disabled">
+            <UsersIcon className="bottom-icon" />
+            <span>Hangout</span>
+          </div>
+          <div className="bottom-item disabled">
+            <CalendarDaysIcon className="bottom-icon" />
+            <span>Event</span>
+          </div>
+          <div className="bottom-item" onClick={() => onNavigate('profile')}>
+            <UserCircleIcon className="bottom-icon" />
+            <span>Profile</span>
+          </div>
+        </nav>
+      )}
       <AnimatePresence>
         {showChatList && !activeChat && (
           <ChatList

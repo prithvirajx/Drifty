@@ -94,50 +94,42 @@ const NotificationPopup = ({ isOpen, onClose }) => {
         <>
           <motion.div 
             className="notification-overlay"
-            style={{
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background: 'rgba(0, 0, 0, 0.7)',
-              zIndex: 1000,
-              backdropFilter: 'blur(8px)',
-              WebkitBackdropFilter: 'blur(8px)',
-            }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
             onClick={onClose}
-          />
-          <motion.div 
-            className="notification-popup"
-            initial={{ opacity: 0, y: 20, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.98 }}
-            transition={{
-              type: "spring",
-              damping: 25,
-              stiffness: 400,
-              mass: 0.8,
-              delay: 0.05
-            }}
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
-            <div className="notification-header">
-              <h3>Notifications</h3>
-              <button onClick={onClose} className="close-btn">×</button>
-            </div>
-            <div className="notification-list">
-              {notifications.map((notification) => (
-                <div 
-                  key={notification.id} 
-                  className={`notification-item ${!notification.read ? 'unread' : ''}`}
-                >
-                  {renderNotificationContent(notification)}
-                </div>
-              ))}
-            </div>
+            <motion.div 
+              className="notification-popup"
+              initial={{ opacity: 0, y: 20, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.98 }}
+              transition={{
+                type: "spring",
+                damping: 25,
+                stiffness: 400,
+                mass: 0.8,
+                delay: 0.05
+              }}
+              onClick={e => e.stopPropagation()}
+            >
+              <div className="notification-header">
+                <h3>Notifications</h3>
+                <button onClick={onClose} className="close-btn">×</button>
+              </div>
+              <div className="notification-list">
+                {notifications.map((notification) => (
+                  <div 
+                    key={notification.id} 
+                    className={`notification-item ${!notification.read ? 'unread' : ''}`}
+                  >
+                    {renderNotificationContent(notification)}
+                  </div>
+                ))}
+              </div>
+            </motion.div>
           </motion.div>
         </>
       )}
