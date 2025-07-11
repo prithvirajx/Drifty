@@ -146,13 +146,13 @@ const HangoutPage = ({ onNavigate }) => {
                 <div className="profile-avatar">
                   <img src={profile.avatar} alt={profile.name} />
                   <div className="profile-status"></div>
-                </div>
-                <div className="profile-details">
-                  <h3>{profile.name}</h3>
-                  <div className="profile-meta">
-                    <span>{profile.age} years</span>
-                    <span className="divider">•</span>
-                    <span>{profile.distance} km away</span>
+                  <div className="profile-info-tape">
+                    <h3>{profile.name}</h3>
+                    <div className="profile-meta">
+                      <span>{profile.age} years</span>
+                      <span className="divider">•</span>
+                      <span>{profile.distance} km away</span>
+                    </div>
                   </div>
                 </div>
               </motion.div>
