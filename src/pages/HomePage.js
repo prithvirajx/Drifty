@@ -91,15 +91,9 @@ const HomePage = ({ onNavigate }) => {
     setPosts([newPost, ...posts]);
   };
   return (
-    <motion.div 
-      className="home-page"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <div className="home-page">
       <div className="home-container">
-        {/* Top Navigation */}
+        {/* Top Navigation - Keep it outside the motion.div to prevent animation */}
         <nav className="home-nav">
           <div className="nav-logo">Drifty</div>
           <div className="nav-icons">
@@ -119,27 +113,35 @@ const HomePage = ({ onNavigate }) => {
           </div>
         </nav>
 
-        {/* Create Post Card */}
-        <CreatePostCard onCreate={handleCreatePost} />
+        {/* Main Content with Animation - Same as ProfilePage */}
+        <motion.div
+          className="content-container"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          {/* Create Post Card */}
+          <CreatePostCard onCreate={handleCreatePost} />
 
-        {/* Feed List */}
-        <div className="feed-list">
-          <AnimatePresence>
-            {posts.map((post) => (
-              <PostCard key={post.id} post={post} />
-            ))}
-          </AnimatePresence>
-        </div>
+          {/* Feed List */}
+          <div className="feed-list">
+            <AnimatePresence>
+              {posts.map((post) => (
+                <PostCard key={post.id} post={post} />
+              ))}
+            </AnimatePresence>
+          </div>
+        </motion.div>
       </div>
 
-      {/* Bottom Navigation (hide when chat room is open) */}
+      {/* Bottom Navigation (hide when chat room is open) - Keep it outside the motion.div */}
       {!activeChat && (
         <nav className="bottom-nav glass-card">
           <div className="bottom-item active">
             <HomeIcon className="bottom-icon" />
             <span>Feed</span>
           </div>
-          <div className="bottom-item disabled">
+          <div className="bottom-item" onClick={() => onNavigate('hangout')}>
             <UsersIcon className="bottom-icon" />
             <span>Hangout</span>
           </div>
@@ -170,7 +172,7 @@ const HomePage = ({ onNavigate }) => {
           />
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 };
 

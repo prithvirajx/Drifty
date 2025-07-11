@@ -1,17 +1,330 @@
+/* Hangout Page Styles */
+.hangout-page {
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: white;
+  padding-bottom: 80px;
+}
+
+.hangout-content {
+  max-width: 500px;
+  margin: 80px auto 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Availability Card */
+.availability-card {
+  background: rgba(30, 30, 30, 0.8);
+  border-radius: 20px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.availability-card.available {
+  background: rgba(255, 30, 30, 0.15);
+  border-color: rgba(255, 50, 50, 0.5);
+}
+
+.availability-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.availability-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.availability-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 8px 15px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.availability-toggle.on {
+  background: rgba(255, 50, 50, 0.3);
+  border: 1px solid rgba(255, 80, 80, 0.5);
+}
+
+.availability-toggle.off {
+  background: rgba(50, 50, 50, 0.5);
+  border: 1px solid rgba(100, 100, 100, 0.3);
+}
+
+.toggle-handle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.availability-toggle.on .toggle-handle {
+  background: rgba(255, 255, 255, 0.9);
+  color: #ff3333;
+}
+
+.availability-toggle.off .toggle-handle {
+  background: rgba(100, 100, 100, 0.5);
+  color: #999;
+}
+
+.toggle-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.toggle-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.availability-hint {
+  margin: 10px 0 0;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+}
+
+/* Profiles Grid */
+.profiles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  width: 100%;
+  margin-top: 20px;
+  padding: 0 10px;
+}
+
+/* Profile Card */
+.profile-card {
+  background: rgba(30, 30, 30, 0.8);
+  border-radius: 20px;
+  padding: 16px 12px 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  aspect-ratio: 3/2;
+  position: relative;
+  overflow: hidden;
+  height: 240px;
+}
+
+/* Profile Card Elements */
+.profile-avatar {
+  position: relative;
+  width: 100%;
+  height: 140px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 50, 50, 0.3);
+  margin-bottom: 12px;
+  transition: transform 0.3s ease;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-card:hover .profile-avatar {
+  transform: scale(1.05);
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.profile-status {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 12px;
+  height: 12px;
+  background: #4caf50;
+  border-radius: 50%;
+  border: 2px solid #1a1a1a;
+  box-shadow: 0 0 0 2px rgba(30, 30, 30, 0.8);
+  z-index: 2;
+}
+
+.profile-details {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.profile-details h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  padding: 0 10px;
+}
+
+.profile-meta {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.profile-meta .divider {
+  color: rgba(255, 50, 50, 0.5);
+  font-weight: bold;
+}
+
+/* Hover Effects */
+.profile-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent, rgba(255, 50, 50, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.profile-card:hover::before {
+  opacity: 1;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .profiles-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  
+  .profile-card {
+    padding: 16px 10px;
+    height: 220px;
+  }
+  
+  .profile-avatar {
+    height: 120px;
+    border-radius: 0;
+  }
+  
+  .profile-details h3 {
+    font-size: 1.1rem;
+  }
+  
+  .profile-meta {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .profiles-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .hangout-content {
+    padding: 12px;
+    margin-top: 60px;
+  }
+  
+  .availability-card {
+    padding: 15px;
+  }
+}
+
 /* Profile Page Styles */
 .profile-page .home-container {
   padding-bottom: 100px; /* Space for bottom nav */
 }
 
+/* Profile Header Card */
 .profile-card {
   padding: 24px;
-  margin-top: 20px;
-  background: rgba(18, 18, 18, 0.75);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 80px;
+  background: rgba(20, 20, 20, 0.9);
+  border: 1px solid #ff0000;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(255, 0, 0, 0.2);
+  width: 100%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Profile Section Cards */
+.profile-section-card {
+  padding: 20px;
+  background: rgba(20, 20, 20, 0.9);
+  border: 1px solid #ff0000;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(255, 0, 0, 0.2);
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 24px auto;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.profile-section-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(255, 0, 0, 0.2), 0 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+.profile-section-card h3 {
   color: #fff;
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 0, 0, 0.15);
+  padding-bottom: 8px;
+}
+
+.profile-section-card p {
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  line-height: 1.5;
 }
 
 .profile-header {
@@ -32,10 +345,104 @@
 }
 
 .profile-header-info h2 {
-  font-size: 28px;
-  font-weight: 700;
-  margin: 0;
-  text-align: left;
+  margin: 0 0 12px 0;
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.profile-action-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-action-btn.follow-btn {
+  background: #ff0000;
+  color: white;
+  border: 1px solid #ff0000;
+}
+
+.profile-action-btn.message-btn {
+  background: transparent;
+  color: #ff0000;
+  border: 1px solid #ff0000;
+}
+
+.profile-action-btn.follow-btn:hover {
+  background: #e60000;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(255, 0, 0, 0.3);
+}
+
+.profile-action-btn.message-btn:hover {
+  background: rgba(255, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.profile-action-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Profile Tabs */
+.profile-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 0 auto 24px auto;
+  max-width: 800px;
+  padding: 0 16px;
+}
+
+.profile-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: rgba(30, 30, 30, 0.7);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.profile-tab:hover {
+  background: rgba(255, 0, 0, 0.1);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.profile-tab.active {
+  background: rgba(255, 0, 0, 0.2);
+  color: #ff4d4d;
+  border-color: rgba(255, 0, 0, 0.3);
+}
+
+.profile-tab .tab-icon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.profile-tab.active .tab-icon {
+  color: #ff4d4d;
 }
 
 .profile-header-info p {
@@ -60,7 +467,7 @@
   font-size: 18px;
   font-weight: 600;
   color: #ff4b4b;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -87,7 +494,7 @@
   display: block;
   font-size: 12px;
   color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   text-transform: uppercase;
 }
 
@@ -121,7 +528,7 @@
   font-size: 18px;
   font-weight: 600;
   color: #ff4b4b;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -351,7 +758,7 @@ h2 {
 
 .gender-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(255, 0, 0, 0.1);
+  box-shadow: 0 12px 35px rgba(255, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .gender-card.selected {
@@ -544,10 +951,11 @@ h2 {
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 16px;
+  border-radius: 20px;
   border: 1px solid transparent;
   background: linear-gradient(135deg, rgba(255,0,0,0.2), rgba(255,0,0,0)) border-box;
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(to right, transparent, white 20%, white 80%, transparent);
+  mask: linear-gradient(to right, transparent, white 20%, white 80%, transparent);
   -webkit-mask-composite: xor;
           mask-composite: exclude;
   pointer-events: none;
@@ -562,7 +970,7 @@ h2 {
   padding: 12px 24px;
   background: linear-gradient(90deg, #ff0000, #ff6b6b);
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   color: #fff;
   font-weight: 600;
   cursor: pointer;
@@ -593,16 +1001,21 @@ h2 {
 }
 
 .post-card {
-  border: 1px solid rgba(255,0,0,0.15);
-  border-radius: 16px;
+  border: 1px solid rgba(255, 0, 0, 0.15);
+  border-radius: 20px;
   overflow: hidden;
   background: rgba(26, 26, 26, 0.75); /* Glass card background */
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 32px rgba(255, 0, 0, 0.15), 0 4px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.post-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(255, 0, 0, 0.2), 0 6px 25px rgba(0, 0, 0, 0.15);
 }
 
 .post-header {
@@ -872,7 +1285,7 @@ h2 {
   display: block;
   font-weight: 400;
   letter-spacing: 0.3px;
-  margin-top: 2px;
+  margin-top: 4px;
 }
 
 .notification-actions {
@@ -887,7 +1300,7 @@ h2 {
   flex: 1;
   padding: 8px 12px;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 0.8rem;
   font-weight: 500;
   cursor: pointer;
@@ -985,9 +1398,55 @@ h2 {
 /* Home Page Styles */
 .home-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
-  color: white;
+  background: #000000; /* Pure black background */
+  color: #ffffff;
   padding: 20px;
+}
+
+/* Update the main content area */
+.home-container {
+  background: #000000; /* Pure black background */
+  color: #ffffff;
+}
+
+/* Update post cards */
+.post-card {
+  background: rgba(20, 20, 20, 0.9); /* Slightly lighter black for cards */
+  border: 1px solid #ff0000; /* Red border */
+  box-shadow: 0 4px 20px rgba(255, 0, 0, 0.2); /* Red glow */
+}
+
+/* Update text colors */
+.post-content, 
+.post-caption,
+.post-username,
+.post-timestamp {
+  color: #ffffff; /* White text */
+}
+
+/* Update interaction elements */
+.post-actions {
+  border-top: 1px solid #ff0000; /* Red separator */
+}
+
+/* Update create post card */
+.create-post-card {
+  background: rgba(20, 20, 20, 0.9); /* Slightly lighter black */
+  border: 1px solid #ff0000; /* Red border */
+  box-shadow: 0 4px 20px rgba(255, 0, 0, 0.2); /* Red glow */
+  border-radius: 20px; /* Rounded corners */
+}
+
+/* Update buttons and interactive elements */
+.upload-btn {
+  background: #ff0000; /* Red button */
+  color: white;
+  border: none;
+}
+
+.upload-btn:hover {
+  background: #cc0000; /* Darker red on hover */
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
 }
 
 .home-container {
@@ -1023,7 +1482,8 @@ h2 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  color: transparent;
   letter-spacing: 1px;
   padding-left: 22px;
 }
@@ -1055,7 +1515,7 @@ h2 {
   background: rgba(26, 26, 26, 0.8);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 0, 0, 0.1);
-  border-radius: 16px;
+  border-radius: 20px;
   padding: 40px;
   text-align: center;
   max-width: 600px;
@@ -1070,7 +1530,8 @@ h2 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 .welcome-card p {
@@ -1252,6 +1713,12 @@ h2 {
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 30px;
 }
 
 .auth-container h2 {
@@ -1279,7 +1746,7 @@ h2 {
   text-align: center;
   font-size: 24px;
   border: 1px solid #444;
-  border-radius: 8px;
+  border-radius: 12px;
   background-color: #2d3748;
   color: white;
   transition: all 0.3s;
@@ -1313,7 +1780,7 @@ h2 {
   padding: 12px 15px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
+  border-radius: 12px;
   color: #fff;
   font-size: 16px;
   transition: all 0.3s ease;
@@ -1335,7 +1802,7 @@ h2 {
   background: #ff0000;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
@@ -1375,7 +1842,7 @@ h2 {
   padding: 12px 15px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
+  border-radius: 12px;
   color: #fff;
   font-size: 16px;
   transition: all 0.3s ease;
@@ -1397,7 +1864,7 @@ h2 {
   display: flex;
   align-items: center;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.05);
 }
@@ -1442,7 +1909,7 @@ h2 {
   letter-spacing: 5px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
+  border-radius: 12px;
   color: #fff;
 }
 
@@ -1539,8 +2006,13 @@ h2 {
 /* Auth Flow Styles */
 .auth-wrapper {
   width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 100%;
+  margin: 0;
   padding: 20px;
 }
 
@@ -2032,7 +2504,8 @@ h2 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  color: transparent;
   letter-spacing: 1px;
   padding-left: 22px;
 }
@@ -2142,7 +2615,7 @@ h2 {
   }
 
   .create-post-card {
-    margin-top: 120px !important;
+    margin-top: 60px !important;
   }
 }
 
@@ -2223,7 +2696,7 @@ h2 {
   min-height: 48px;
   background: transparent;
   border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 12px;
   color: #fff;
   margin-bottom: 15px;
@@ -2234,7 +2707,7 @@ h2 {
   width: 100%;
   aspect-ratio: 3/4;
   background: rgba(255,255,255,0.05);
-  border-radius: 8px;
+  border-radius: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2259,7 +2732,7 @@ h2 {
   padding: 12px 24px;
   background: rgba(255,0,0,0.2);
   border: 1px solid rgba(255,0,0,0.4);
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
   color: #fff;
   font-weight: 600;
@@ -2275,7 +2748,7 @@ h2 {
   padding: 15px;
   background: #ff0000;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   color: #fff;
   font-weight: 600;
   font-size: 18px;

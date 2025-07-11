@@ -11,6 +11,7 @@ import AuthFlow from './components/DevAuthFlow';
 import UserOnboarding from './components/UserOnboarding';
 import CreateUsername from './components/CreateUsername';
 import HomePage from './pages/HomePage';
+import HangoutPage from './pages/HangoutPage';
 import ProfilePage from './pages/ProfilePage';
 import { getUserProfile, saveUserProfile, auth } from './firebase';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -66,12 +67,18 @@ function App() {
   };
 
   const renderContent = () => {
-    if (isAuthenticated && hasCompletedOnboarding) {
-      if (currentPage === 'profile') {
-        return <ProfilePage userData={userData} onNavigate={handleNavigate} />;
+        if (isAuthenticated && hasCompletedOnboarding) {
+      switch (currentPage) {
+        case 'profile':
+          return <ProfilePage userData={userData} onNavigate={handleNavigate} />;
+        case 'hangout':
+          return <HangoutPage userData={userData} onNavigate={handleNavigate} />;
+        case 'home':
+        default:
+          return <HomePage userData={userData} onNavigate={handleNavigate} />;
       }
-      return <HomePage userData={userData} onNavigate={handleNavigate} />;
     }
+    // Fallback when onboarding not completed
     
     if (isAuthenticated) {
       if (!userData) {
