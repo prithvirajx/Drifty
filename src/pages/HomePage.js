@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { EnvelopeIcon, BellIcon, MagnifyingGlassIcon, HomeIcon, UsersIcon, CalendarDaysIcon, UserCircleIcon } from '@heroicons/react/24/outline';
+import NotificationPopup from '../components/NotificationPopup';
 import CreatePostCard from '../components/CreatePostCard';
 import PostCard from '../components/PostCard';
 import ChatList from '../components/ChatList';
@@ -46,6 +47,8 @@ const HomePage = () => {
 
   const [showChatList, setShowChatList] = useState(false);
   const [activeChat, setActiveChat] = useState(null);
+  const [showNotifications, setShowNotifications] = useState(false);
+  const notificationRef = useRef(null);
 
   const toggleChatList = () => {
     setShowChatList((prev) => !prev);
@@ -58,6 +61,30 @@ const HomePage = () => {
 
   const handleCloseChatList = () => setShowChatList(false);
   const handleBackToList = () => setActiveChat(null);
+
+  // Close notifications when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (notificationRef.current && !notificationRef.current.contains(event.target)) {
+        // Check if the click was on the bell icon
+        const bellIcon = document.querySelector('.nav-icon[data-component-name="BellIcon"]');
+        if (bellIcon && !bellIcon.contains(event.target)) {
+          setShowNotifications(false);
+        }
+      }
+    }
+
+    if (showNotifications) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showNotifications]);
+
+  const toggleNotifications = () => {
+    setShowNotifications(!showNotifications);
+  };
 
   const handleCreatePost = (newPost) => {
     // Add the new post at the top of the feed
@@ -77,7 +104,17 @@ const HomePage = () => {
           <div className="nav-logo">Drifty</div>
           <div className="nav-icons">
             <MagnifyingGlassIcon className="nav-icon" />
-            <BellIcon className="nav-icon" />
+            <div ref={notificationRef} style={{ position: 'relative' }}>
+              <BellIcon 
+                className="nav-icon" 
+                onClick={toggleNotifications}
+                data-component-name="BellIcon"
+              />
+              <NotificationPopup 
+                isOpen={showNotifications} 
+                onClose={() => setShowNotifications(false)} 
+              />
+            </div>
             <EnvelopeIcon className="nav-icon" onClick={toggleChatList} />
           </div>
         </nav>

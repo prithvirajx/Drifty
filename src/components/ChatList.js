@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { XMarkIcon } from '@heroicons/react/24/outline';
+import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 
 const ChatList = ({ chats, onSelectChat, onClose }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -18,15 +18,17 @@ const ChatList = ({ chats, onSelectChat, onClose }) => {
       transition={{ type: 'spring', stiffness: 260, damping: 30 }}
     >
       <div className="chat-list-header">
-        <h3>Chats</h3>
-        <input
-          type="search"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search chats"
-          className="chat-search-input"
-        />
-        <XMarkIcon className="chat-close-icon" onClick={onClose} />
+        <div style={{ display: 'flex', alignItems: 'center', width: '100%', gap: 8 }}>
+          <ArrowLeftIcon className="chat-close-icon" onClick={onClose} style={{ flexShrink: 0 }} />
+          <input
+            type="search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search chats"
+            className="chat-search-input"
+            style={{ flex: 1 }}
+          />
+        </div>
       </div>
       <div className="chat-items">
         {filteredChats.map((chat) => (
