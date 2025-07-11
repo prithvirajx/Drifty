@@ -1,0 +1,18 @@
+# Netlify configuration file for deploying the Drifty React application
+# For more information see: https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  # The command Netlify should run to build the production-ready site
+  command = "npm run build"
+  # Directory to publish (React build output)
+  publish = "build"
+
+[build.environment]
+  CI = "false"
+  NODE_VERSION = "18"
+
+# Redirect all requests to index.html so the React Router can handle client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
